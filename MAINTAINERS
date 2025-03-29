@@ -13157,6 +13157,7 @@ L:	linux-security-module@vger.kernel.org
 S:	Supported
 W:	https://landlock.io
 T:	git https://git.kernel.org/pub/scm/linux/kernel/git/mic/linux.git
+F:	Documentation/admin-guide/LSM/landlock.rst
 F:	Documentation/security/landlock.rst
 F:	Documentation/userspace-api/landlock.rst
 F:	fs/ioctl.c
@@ -22526,15 +22527,6 @@ F:	include/linux/spi/
 F:	include/uapi/linux/spi/
 F:	tools/spi/
 
-SPIDERNET NETWORK DRIVER for CELL
-M:	Ishizaki Kou <kou.ishizaki@toshiba.co.jp>
-M:	Geoff Levand <geoff@infradead.org>
-L:	netdev@vger.kernel.org
-L:	linuxppc-dev@lists.ozlabs.org
-S:	Maintained
-F:	Documentation/networking/device_drivers/ethernet/toshiba/spider_net.rst
-F:	drivers/net/ethernet/toshiba/spider_net*
-
 SPMI SUBSYSTEM
 M:	Stephen Boyd <sboyd@kernel.org>
 L:	linux-kernel@vger.kernel.org
@@ -24195,6 +24187,8 @@ Q:	https://patchwork.kernel.org/project/linux-integrity/list/
 T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jarkko/linux-tpmdd.git
 F:	Documentation/devicetree/bindings/tpm/
 F:	drivers/char/tpm/
+F:	include/linux/tpm*.h
+F:	include/uapi/linux/vtpm_proxy.h
 F:	tools/testing/selftests/tpm2/
 
 TPS546D24 DRIVER
