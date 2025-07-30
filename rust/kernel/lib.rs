@@ -54,6 +54,7 @@ extern crate self as kernel;
 
 pub use ffi;
 
+pub mod acpi;
 pub mod alloc;
 #[cfg(CONFIG_AUXILIARY_BUS)]
 pub mod auxiliary;
@@ -103,6 +104,7 @@ pub mod platform;
 pub mod prelude;
 pub mod print;
 pub mod rbtree;
+pub mod regulator;
 pub mod revocable;
 pub mod security;
 pub mod seq_file;

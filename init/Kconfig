@@ -1716,13 +1716,9 @@ config FUTEX_PI
 	depends on FUTEX && RT_MUTEXES
 	default y
 
-#
-# marked broken for performance reasons; gives us one more cycle to sort things out.
-#
 config FUTEX_PRIVATE_HASH
 	bool
 	depends on FUTEX && !BASE_SMALL && MMU
-	depends on BROKEN
 	default y
 
 config FUTEX_MPOL
@@ -1880,13 +1876,6 @@ config CACHESTAT_SYSCALL
 	  pages marked for writeback, (recently) evicted pages).
 
 	  If unsure say Y here.
-
-config PC104
-	bool "PC/104 support" if EXPERT
-	help
-	  Expose PC/104 form factor device drivers and options available for
-	  selection and configuration. Enable this option if your target
-	  machine has a PC/104 bus.
 
 config KALLSYMS
 	bool "Load all symbols for debugging/ksymoops" if EXPERT
