@@ -388,7 +388,7 @@ B:	https://bugzilla.kernel.org
 F:	drivers/acpi/*thermal*
 
 ACPI VIOT DRIVER
-M:	Jean-Philippe Brucker <jean-philippe@linaro.org>
+M:	Jean-Philippe Brucker <jpb@kernel.org>
 L:	linux-acpi@vger.kernel.org
 L:	iommu@lists.linux.dev
 S:	Maintained
@@ -974,7 +974,7 @@ F:	drivers/edac/al_mc_edac.c
 AMAZON ANNAPURNA LABS THERMAL MMIO DRIVER
 M:	Talel Shenhar <talel@amazon.com>
 S:	Maintained
-F:	Documentation/devicetree/bindings/thermal/amazon,al-thermal.txt
+F:	Documentation/devicetree/bindings/thermal/amazon,al-thermal.yaml
 F:	drivers/thermal/thermal_mmio.c
 
 AMAZON ETHERNET DRIVERS
@@ -2269,7 +2269,7 @@ F:	drivers/iommu/arm/
 F:	drivers/iommu/io-pgtable-arm*
 
 ARM SMMU SVA SUPPORT
-R:	Jean-Philippe Brucker <jean-philippe@linaro.org>
+R:	Jean-Philippe Brucker <jpb@kernel.org>
 F:	drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-sva.c
 
 ARM SUB-ARCHITECTURES
@@ -2294,7 +2294,7 @@ F:	Documentation/devicetree/bindings/interrupt-controller/actions,owl-sirq.yaml
 F:	Documentation/devicetree/bindings/mmc/owl-mmc.yaml
 F:	Documentation/devicetree/bindings/net/actions,owl-emac.yaml
 F:	Documentation/devicetree/bindings/pinctrl/actions,*
-F:	Documentation/devicetree/bindings/power/actions,owl-sps.txt
+F:	Documentation/devicetree/bindings/power/actions,s500-sps.yaml
 F:	Documentation/devicetree/bindings/timer/actions,owl-timer.yaml
 F:	arch/arm/boot/dts/actions/
 F:	arch/arm/mach-actions/
@@ -2688,7 +2688,7 @@ F:	Documentation/ABI/testing/debugfs-moxtet
 F:	Documentation/ABI/testing/sysfs-bus-i2c-devices-turris-omnia-mcu
 F:	Documentation/ABI/testing/sysfs-bus-moxtet-devices
 F:	Documentation/ABI/testing/sysfs-firmware-turris-mox-rwtm
-F:	Documentation/devicetree/bindings/bus/moxtet.txt
+F:	Documentation/devicetree/bindings/bus/cznic,moxtet.yaml
 F:	Documentation/devicetree/bindings/firmware/cznic,turris-mox-rwtm.txt
 F:	Documentation/devicetree/bindings/firmware/cznic,turris-omnia-mcu.yaml
 F:	Documentation/devicetree/bindings/interrupt-controller/marvell,mpic.yaml
@@ -3164,6 +3164,15 @@ F:	arch/arm64/boot/dts/freescale/s32g*.dts*
 F:	drivers/pinctrl/nxp/
 F:	drivers/rtc/rtc-s32g.c
 
+ARM/NXP S32G PCIE CONTROLLER DRIVER
+M:	Ciprian Marian Costea <ciprianmarian.costea@oss.nxp.com>
+R:	NXP S32 Linux Team <s32@nxp.com>
+L:	imx@lists.linux.dev
+L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
+S:	Maintained
+F:	Documentation/devicetree/bindings/pci/nxp,s32g-pcie.yaml
+F:	drivers/pci/controller/dwc/pcie-nxp-s32g*
+
 ARM/NXP S32G/S32R DWMAC ETHERNET DRIVER
 M:	Jan Petrous <jan.petrous@oss.nxp.com>
 R:	s32@nxp.com
@@ -3435,7 +3444,7 @@ S:	Maintained
 F:	drivers/net/ethernet/stmicro/stmmac/dwmac-socfpga.c
 
 ARM/SOCFPGA EDAC BINDINGS
-M:	Matthew Gerlach <matthew.gerlach@altera.com>
+M:	Niravkumar L Rabara <niravkumarlaxmidas.rabara@altera.com>
 S:	Maintained
 F:	Documentation/devicetree/bindings/edac/altr,socfpga-ecc-manager.yaml
 
@@ -4155,6 +4164,12 @@ L:	linux-iio@vger.kernel.org
 S:	Maintained
 F:	Documentation/devicetree/bindings/iio/adc/avia-hx711.yaml
 F:	drivers/iio/adc/hx711.c
+
+AWINIC AW99706 WLED BACKLIGHT DRIVER
+M:	Junjie Cao <caojunjie650@gmail.com>
+S:	Maintained
+F:	Documentation/devicetree/bindings/leds/backlight/awinic,aw99706.yaml
+F:	drivers/video/backlight/aw99706.c
 
 AX.25 NETWORK LAYER
 L:	linux-hams@vger.kernel.org
@@ -5227,6 +5242,13 @@ S:	Supported
 W:	http://www.broadcom.com
 F:	drivers/infiniband/hw/bnxt_re/
 F:	include/uapi/rdma/bnxt_re-abi.h
+
+BROADCOM 800 GIGABIT ROCE DRIVER
+M:	Siva Reddy Kallam <siva.kallam@broadcom.com>
+L:	linux-rdma@vger.kernel.org
+S:	Supported
+W:	http://www.broadcom.com
+F:	drivers/infiniband/hw/bng_re/
 
 BROADCOM NVRAM DRIVER
 M:	Rafał Miłecki <zajec5@gmail.com>
@@ -11582,6 +11604,8 @@ F:	mm/hugetlb.c
 F:	mm/hugetlb_cgroup.c
 F:	mm/hugetlb_cma.c
 F:	mm/hugetlb_cma.h
+F:	mm/hugetlb_sysctl.c
+F:	mm/hugetlb_sysfs.c
 F:	mm/hugetlb_vmemmap.c
 F:	mm/hugetlb_vmemmap.h
 F:	tools/testing/selftests/cgroup/test_hugetlb_memcg.c
@@ -11599,6 +11623,8 @@ M:	Miaohe Lin <linmiaohe@huawei.com>
 R:	Naoya Horiguchi <nao.horiguchi@gmail.com>
 L:	linux-mm@kvack.org
 S:	Maintained
+F:	include/linux/memory-failure.h
+F:	include/trace/events/memory-failure.h
 F:	mm/hwpoison-inject.c
 F:	mm/memory-failure.c
 
@@ -16324,6 +16350,7 @@ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
 F:	include/linux/gfp.h
 F:	include/linux/gfp_types.h
 F:	include/linux/highmem.h
+F:	include/linux/leafops.h
 F:	include/linux/memory.h
 F:	include/linux/mm.h
 F:	include/linux/mm_*.h
@@ -16331,6 +16358,7 @@ F:	include/linux/mmzone.h
 F:	include/linux/mmdebug.h
 F:	include/linux/mmu_notifier.h
 F:	include/linux/pagewalk.h
+F:	include/linux/pgalloc.h
 F:	include/linux/pgtable.h
 F:	include/linux/ptdump.h
 F:	include/linux/vmpressure.h
@@ -18742,7 +18770,7 @@ F:	Documentation/devicetree/bindings/regulator/nxp,pf5300.yaml
 F:	drivers/regulator/pf530x-regulator.c
 
 NXP PF1550 PMIC MFD DRIVER
-M:	Samuel Kayode <samuel.kayode@savoirfairelinux.com>
+M:	Samuel Kayode <samkay014@gmail.com>
 L:	imx@lists.linux.dev
 S:	Maintained
 F:	Documentation/devicetree/bindings/mfd/nxp,pf1550.yaml
@@ -18750,7 +18778,7 @@ F:	drivers/input/misc/pf1550-onkey.c
 F:	drivers/mfd/pf1550.c
 F:	drivers/power/supply/pf1550-charger.c
 F:	drivers/regulator/pf1550-regulator.c
-F:	include/linux/mfd/pfd1550.h
+F:	include/linux/mfd/pf1550.h
 
 NXP PF8100/PF8121A/PF8200 PMIC REGULATOR DEVICE DRIVER
 M:	Jagan Teki <jagan@amarulasolutions.com>
@@ -19769,6 +19797,13 @@ S:	Orphan
 F:	Documentation/devicetree/bindings/pci/cdns,*
 F:	drivers/pci/controller/cadence/*cadence*
 
+PCI DRIVER FOR CIX Sky1
+M:	Hans Zhang <hans.zhang@cixtech.com>
+L:	linux-pci@vger.kernel.org
+S:	Maintained
+F:	Documentation/devicetree/bindings/pci/cix,sky1-pcie-*.yaml
+F:	drivers/pci/controller/cadence/*sky1*
+
 PCI DRIVER FOR FREESCALE LAYERSCAPE
 M:	Minghuan Lian <minghuan.Lian@nxp.com>
 M:	Mingkai Hu <mingkai.hu@nxp.com>
@@ -20019,6 +20054,7 @@ F:	include/linux/pci-p2pdma.h
 
 PCI POWER CONTROL
 M:	Bartosz Golaszewski <brgl@kernel.org>
+M:	Manivannan Sadhasivam <mani@kernel.org>
 L:	linux-pci@vger.kernel.org
 S:	Maintained
 T:	git git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci.git
@@ -20154,6 +20190,14 @@ L:	linux-arm-msm@vger.kernel.org
 S:	Maintained
 F:	drivers/pci/controller/dwc/pcie-qcom-common.c
 F:	drivers/pci/controller/dwc/pcie-qcom.c
+
+PCIE DRIVER FOR RENESAS RZ/G3S SERIES
+M:	Claudiu Beznea <claudiu.beznea.uj@bp.renesas.com>
+L:	linux-pci@vger.kernel.org
+L:	linux-renesas-soc@vger.kernel.org
+S:	Supported
+F:	Documentation/devicetree/bindings/pci/renesas,r9a08g045-pcie.yaml
+F:	drivers/pci/controller/pcie-rzg3s-host.c
 
 PCIE DRIVER FOR ROCKCHIP
 M:	Shawn Lin <shawn.lin@rock-chips.com>
@@ -21764,8 +21808,12 @@ F:	tools/testing/selftests/rtc/
 
 Real-time Linux Analysis (RTLA) tools
 M:	Steven Rostedt <rostedt@goodmis.org>
+M:	Tomas Glozar <tglozar@redhat.com>
 L:	linux-trace-kernel@vger.kernel.org
+L:	linux-kernel@vger.kernel.org
 S:	Maintained
+Q:	https://patchwork.kernel.org/project/linux-trace-kernel/list/
+T:	git git://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace.git
 F:	Documentation/tools/rtla/
 F:	tools/tracing/rtla/
 
@@ -22473,6 +22521,12 @@ L:	linux-serial@vger.kernel.org
 S:	Odd Fixes
 F:	drivers/tty/serial/rp2.*
 
+ROHM BD71828 CHARGER
+M:	Andreas Kemnade <andreas@kemnade.info>
+M:	Matti Vaittinen <mazziesaccount@gmail.com>
+S:	Maintained
+F:	drivers/power/supply/bd71828-charger.c
+
 ROHM BD79703 DAC
 M:	Matti Vaittinen <mazziesaccount@gmail.com>
 S:	Supported
@@ -22652,6 +22706,7 @@ F:	Documentation/trace/rv/
 F:	include/linux/rv.h
 F:	include/rv/
 F:	kernel/trace/rv/
+F:	tools/testing/selftests/verification/
 F:	tools/verification/
 
 RUST
@@ -27177,6 +27232,13 @@ L:	virtualization@lists.linux.dev
 S:	Maintained
 F:	drivers/vfio/pci/virtio
 
+VFIO XE PCI DRIVER
+M:	Michał Winiarski <michal.winiarski@intel.com>
+L:	kvm@vger.kernel.org
+L:	intel-xe@lists.freedesktop.org
+S:	Supported
+F:	drivers/vfio/pci/xe
+
 VGA_SWITCHEROO
 R:	Lukas Wunner <lukas@wunner.de>
 S:	Maintained
@@ -27418,7 +27480,7 @@ F:	drivers/virtio/virtio_input.c
 F:	include/uapi/linux/virtio_input.h
 
 VIRTIO IOMMU DRIVER
-M:	Jean-Philippe Brucker <jean-philippe@linaro.org>
+M:	Jean-Philippe Brucker <jpb@kernel.org>
 L:	virtualization@lists.linux.dev
 S:	Maintained
 F:	drivers/iommu/virtio-iommu.c
