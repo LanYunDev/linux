@@ -2970,6 +2970,12 @@ Kernel parameters
 			Format: <bool>
 			Default: CONFIG_KFENCE_DEFERRABLE
 
+	kfence.fault=	[MM,KFENCE] Controls the behavior when a KFENCE
+			error is detected.
+			report - print the error report and continue (default).
+			oops   - print the error report and oops.
+			panic  - print the error report and panic.
+
 	kfence.sample_interval=
 			[MM,KFENCE] KFENCE's sample interval in milliseconds.
 			Format: <unsigned integer>
@@ -8543,7 +8549,8 @@ Kernel parameters
         workqueue.default_affinity_scope=
 			Select the default affinity scope to use for unbound
 			workqueues. Can be one of "cpu", "smt", "cache",
-			"numa" and "system". Default is "cache". For more
+			"cache_shard", "numa" and "system". Default is
+			"cache_shard". For more
 			information, see the Affinity Scopes section in
 			Documentation/core-api/workqueue.rst.
 

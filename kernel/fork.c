@@ -2469,7 +2469,10 @@ __latent_entropy struct task_struct *copy_process(
 			init_task_pid(p, PIDTYPE_SID, task_session(current));
 
 			if (is_child_reaper(pid)) {
-				ns_of_pid(pid)->child_reaper = p;
+				struct pid_namespace *ns = ns_of_pid(pid);
+
+				ASSERT_EXCLUSIVE_WRITER(ns->child_reaper);
+				WRITE_ONCE(ns->child_reaper, p);
 				p->signal->flags |= SIGNAL_UNKILLABLE;
 			}
 			p->signal->shared_pending.signal = delayed.signal;
@@ -2511,8 +2514,12 @@ __latent_entropy struct task_struct *copy_process(
 		fd_install(pidfd, pidfile);
 
 	proc_fork_connector(p);
-	sched_post_fork(p);
+	/*
+	 * sched_ext needs @p to be associated with its cgroup in its post_fork
+	 * hook. cgroup_post_fork() should come before sched_post_fork().
+	 */
 	cgroup_post_fork(p, args);
+	sched_post_fork(p);
 	perf_event_fork(p);
 
 	trace_task_newtask(p, clone_flags);
@@ -2665,6 +2672,16 @@ pid_t kernel_clone(struct kernel_clone_args *args)
 	struct task_struct *p;
 	int trace = 0;
 	pid_t nr;
+
+	/*
+	 * Creating an empty mount namespace implies creating a new mount
+	 * namespace.  Set this before copy_process() so that the
+	 * CLONE_NEWNS|CLONE_FS mutual exclusion check works correctly.
+	 */
+	if (clone_flags & CLONE_EMPTY_MNTNS) {
+		clone_flags |= CLONE_NEWNS;
+		args->flags = clone_flags;
+	}
 
 	/*
 	 * For legacy clone() calls, CLONE_PIDFD uses the parent_tid argument
@@ -2944,8 +2961,9 @@ static bool clone3_args_valid(struct kernel_clone_args *kargs)
 {
 	/* Verify that no unknown flags are passed along. */
 	if (kargs->flags &
-	    ~(CLONE_LEGACY_FLAGS | CLONE_CLEAR_SIGHAND | CLONE_INTO_CGROUP |
-	      CLONE_AUTOREAP | CLONE_NNP | CLONE_PIDFD_AUTOKILL))
+	    ~(CLONE_LEGACY_FLAGS | CLONE_CLEAR_SIGHAND |
+	      CLONE_INTO_CGROUP | CLONE_AUTOREAP | CLONE_NNP |
+	      CLONE_PIDFD_AUTOKILL | CLONE_EMPTY_MNTNS))
 		return false;
 
 	/*
@@ -3096,7 +3114,7 @@ static int check_unshare_flags(unsigned long unshare_flags)
 {
 	if (unshare_flags & ~(CLONE_THREAD|CLONE_FS|CLONE_SIGHAND|
 				CLONE_VM|CLONE_FILES|CLONE_SYSVSEM|
-				CLONE_NS_ALL))
+				CLONE_NS_ALL | UNSHARE_EMPTY_MNTNS))
 		return -EINVAL;
 	/*
 	 * Not implemented, but pretend it works if there is nothing
@@ -3195,6 +3213,8 @@ int ksys_unshare(unsigned long unshare_flags)
 	/*
 	 * If unsharing namespace, must also unshare filesystem information.
 	 */
+	if (unshare_flags & UNSHARE_EMPTY_MNTNS)
+		unshare_flags |= CLONE_NEWNS;
 	if (unshare_flags & CLONE_NEWNS)
 		unshare_flags |= CLONE_FS;
 
