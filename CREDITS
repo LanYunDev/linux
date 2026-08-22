@@ -1324,6 +1324,11 @@ D: Initial GPL'd Frame Relay driver
 D: Dynamic PPP devices
 D: Sundry modularizations (PPP, IPX, ...) and fixes
 
+N: Steve French
+E: sfrench@samba.org
+E: smfrench@gmail.com
+D: Author and maintainer of the cifs filesystem for many years.
+
 N: Bob Frey
 E: bobf@advansys.com
 D: AdvanSys SCSI driver
@@ -3103,6 +3108,10 @@ S: Germany
 N: Jens Osterkamp
 E: jens@de.ibm.com
 D: Maintainer of Spidernet network driver for Cell
+
+N: Kent Overstreet
+E: kent.overstreet@linux.dev
+D: Co-authored and contributed to Memory Allocation Profiling
 
 N: Gadi Oxman
 E: gadio@netvision.net.il
